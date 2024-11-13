@@ -1,3 +1,4 @@
+import json
 from typing import Union
 
 from fastapi import FastAPI, Query
@@ -5,6 +6,8 @@ from fastapi import FastAPI, Query
 from pydantic import BaseModel
 
 app = FastAPI()
+
+import requests
 
 
 class Item(BaseModel):
@@ -37,5 +40,13 @@ async def read_items(q: Union[str, None] = Query(default=None, max_length=50)):
 
 # printhsgshgsd
 ###sdjhsdjufgsdyfgsdprint
+
+response = requests.post(url='http://localhost:8337/model/property/listByKeys', json={"projectId":"18c1foju-144-1zx","modelId":"81622159838481472","keys":["DiagramTable-scope"]})
+# print(response.text)
+
+# 数据格式化处理
+json_show = json.dumps(response.json(), indent=2)
+print(json_show)
+
 
 
